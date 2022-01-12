@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using GPInventory.Repository;
 using GPInventory.ViewModels;
 using Xamarin.Forms;
 
 namespace GPInventory.Views
 {
-    public partial class ItemsPage : ContentPage
+    public partial class AddItemPage : ContentPage
     {
-        public ItemsPage()
+        public AddItemPage()
         {
             InitializeComponent();
-            BindingContext = new ItemsPageViewmodel(Navigation);
+            BindingContext = new AddItemViewmodel(Navigation);
         }
     }
 }

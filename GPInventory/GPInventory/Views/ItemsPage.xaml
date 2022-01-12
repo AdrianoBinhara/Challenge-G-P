@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="True"
+    NavigationPage.HasNavigationBar="False"
     x:Class="GPInventory.Views.ItemsPage">
    
     <ContentPage.Content>

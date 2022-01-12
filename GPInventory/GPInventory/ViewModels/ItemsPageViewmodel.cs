@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GPInventory.Models;
 using GPInventory.Repository;
+using GPInventory.Views;
 using Xamarin.Forms;
 
 namespace GPInventory.ViewModels
 {
     public class ItemsPageViewmodel: BaseViewmodel
     {
+        public INavigation Navigation { get; set; }
 
         protected ItemsRepository ItemsRepository { get; } = new ItemsRepository();
 
@@ -28,11 +30,14 @@ namespace GPInventory.ViewModels
         }
 
 
-        public ItemsPageViewmodel()
+        public ItemsPageViewmodel(INavigation navigation)
         {
-            AddItemCommand = new Command<Frame>(async (Frame) => await AddItemAsync(Frame));
+            Navigation = navigation;
+            AddItemCommand = new Command(async () => await AddItemAsync());
             LoadItems();
         }
+
+        public ICommand AddItemCommand { get; set; }
 
         private Task LoadItems()
         {
@@ -51,18 +56,9 @@ namespace GPInventory.ViewModels
             return Task.CompletedTask;
         }
 
-        public ICommand AddItemCommand { get; set; }
-
-        private async Task AddItemAsync(Frame frame)
+        private async Task AddItemAsync()
         {
-            await SimulatePressingEffect(frame);
-        }
-
-
-        private async Task SimulatePressingEffect(Frame frame)
-        {
-            await frame.ScaleTo(0.97, 30, Easing.Linear);
-            await frame.ScaleTo(1, 40, Easing.Linear);
+            await Navigation.PushAsync(new AddItemPage());
         }
     }
 }

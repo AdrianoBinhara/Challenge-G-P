@@ -11,7 +11,7 @@ namespace GPInventory
         {
             InitializeComponent();
 
-            MainPage = new ItemsPage();
+            MainPage = new NavigationPage(new ItemsPage());
         }
 
         protected override void OnStart()

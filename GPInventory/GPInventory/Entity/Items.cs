@@ -7,6 +7,10 @@ namespace GPInventory.Entity
     [Table("Items")]
     public class Items
     {
+        public Items()
+        {
+
+        }
         [Key]
         [DataType("int")]
         [Column("Id")]
