@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPInventory.iOS", "GPInvent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPInventory", "GPInventory\GPInventory.csproj", "{2E0484B1-3940-4904-9C25-2CB11B03E7EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GP_API", "GP_API\GP_API.csproj", "{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{2E0484B1-3940-4904-9C25-2CB11B03E7EF}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{2E0484B1-3940-4904-9C25-2CB11B03E7EF}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{2E0484B1-3940-4904-9C25-2CB11B03E7EF}.Release|iPhone.Build.0 = Release|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{C3387537-BBA9-41CE-AB57-81DFE6CFD4A6}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="True"
+    x:Class="GPInventory.Views.ItemsPage">
+   
+    <ContentPage.Content>
+         <RelativeLayout HorizontalOptions="FillAndExpand"  Padding="10,0" HeightRequest="50" VerticalOptions="Start" BackgroundColor="White">
+                <Label RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.33}"
+                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}"
+                       RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.33}"
+                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}" 
+                       Text="Inventário"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       FontSize="Body"
+                       FontAttributes="Bold"
+                       TextColor="Black"/>
+                <Button x:Name="loginLabel"
+                       Text="&#xf067;" VerticalOptions="CenterAndExpand" TextColor="Black"
+                       HorizontalOptions="End"
+                       FontFamily="FontAwesome"
+                       FontSize="Body"
+                       Command="{Binding AddItemCommand}" CommandParameter="{x:Reference loginLabel}"
+                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.6}"
+                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}"
+                       RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.33}"
+                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}">
+                </Button>
+             <CollectionView  RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
+                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}"
+                       RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=14}"
+                       ItemsSource="{Binding Items}">
+                       
+                 <CollectionView.ItemTemplate>
+                     <DataTemplate>
+                         <Label Text="{Binding Name}"/>
+                     </DataTemplate>
+                 </CollectionView.ItemTemplate>
+             </CollectionView>
+            </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

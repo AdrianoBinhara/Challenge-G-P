@@ -1,4 +1,5 @@
 ﻿using System;
+using GPInventory.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace GPInventory
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new ItemsPage();
         }
 
         protected override void OnStart()
