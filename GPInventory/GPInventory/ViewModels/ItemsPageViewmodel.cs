@@ -34,26 +34,39 @@ namespace GPInventory.ViewModels
         {
             Navigation = navigation;
             AddItemCommand = new Command(async () => await AddItemAsync());
+            RefreshList = new Command(() =>  LoadItems());
             LoadItems();
+            SubscribeMessaging();
+        }
+
+        private void SubscribeMessaging()
+        {
+            MessagingCenter.Subscribe<AddItemViewmodel>(this, "Update", (sender) =>
+            {
+                LoadItems();
+            });
         }
 
         public ICommand AddItemCommand { get; set; }
+        public ICommand RefreshList { get; set; }
 
         private Task LoadItems()
         {
             Task.Run(async () =>
             {
+                IsBusy = true;
                 try
                 {
                     List<ItemsModel> data = await ItemsRepository.GetAllasync();
                     Items = new ObservableCollection<ItemsModel>(data);
                 }
-                catch (Exception ex)
+                finally
                 {
-
+                    IsBusy = false;
                 }
             });
             return Task.CompletedTask;
+            
         }
 
         private async Task AddItemAsync()

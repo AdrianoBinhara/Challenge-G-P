@@ -25,7 +25,7 @@ namespace GPInventory.Entity
                 dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"..","Library", "Inventory.db");
             }
 
-            optionsBuilder.UseSqlite($"filename{dbPath}");
+            optionsBuilder.UseSqlite($"Data Source = {dbPath}");
         }
     }
 }

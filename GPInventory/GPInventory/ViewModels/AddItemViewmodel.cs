@@ -40,6 +40,8 @@ namespace GPInventory.ViewModels
             };
             await this.Itemsrepository.Create(model);
             await Navigation.PopAsync();
+            MessagingCenter.Send<AddItemViewmodel>(this, "Update");
+            MessagingCenter.Unsubscribe<AddItemViewmodel>(this, "Update");
         }
 
     }
