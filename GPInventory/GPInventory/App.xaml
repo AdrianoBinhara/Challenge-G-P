@@ -2,8 +2,10 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GPInventory.App"
+             xmlns:converters="clr-namespace:GPInventory.Core.Converters"
              >
     <Application.Resources>
-        
+        <converters:ImageConverter
+            x:Key="ImageConverter"/>
     </Application.Resources>
 </Application>

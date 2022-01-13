@@ -22,6 +22,20 @@ namespace GPInventory.ViewModels
             get=> _items;
             set=> SetProperty(ref _items, value);
         }
+
+        private int _totalItems;
+        public int TotalItems
+        {
+            get => _totalItems;
+            set => SetProperty(ref _totalItems, value);
+        }
+        private int _totalStock = 0;
+        public int TotalStock
+        {
+            get => _totalStock;
+            set => SetProperty(ref _totalStock, value);
+        }
+
         private bool _isBusy;
         public bool IsBusy
         {
@@ -35,9 +49,16 @@ namespace GPInventory.ViewModels
             Navigation = navigation;
             AddItemCommand = new Command(async () => await AddItemAsync());
             RefreshList = new Command(() =>  LoadItems());
+            UpdateItemCommand = new Command<CollectionView>(async (CollectionView) => await UpdateItemAsync(CollectionView));
+            DeleteItemCommand = new Command<ItemsModel>(async (item) => await DeleteItemAsync(item));
             LoadItems();
             SubscribeMessaging();
         }
+
+        public ICommand AddItemCommand { get; set; }
+        public ICommand RefreshList { get; set; }
+        public ICommand UpdateItemCommand { get; set; }
+        public ICommand DeleteItemCommand { get; set; }
 
         private void SubscribeMessaging()
         {
@@ -46,9 +67,6 @@ namespace GPInventory.ViewModels
                 LoadItems();
             });
         }
-
-        public ICommand AddItemCommand { get; set; }
-        public ICommand RefreshList { get; set; }
 
         private Task LoadItems()
         {
@@ -59,6 +77,8 @@ namespace GPInventory.ViewModels
                 {
                     List<ItemsModel> data = await ItemsRepository.GetAllasync();
                     Items = new ObservableCollection<ItemsModel>(data);
+
+                    TotalStockItems();
                 }
                 finally
                 {
@@ -69,9 +89,37 @@ namespace GPInventory.ViewModels
             
         }
 
+        private void TotalStockItems()
+        {
+            TotalItems = Items.Count;
+            TotalStock = 0;
+            foreach (var item in Items)
+            {
+                TotalStock += item.Quantity;
+            }
+        }
+
         private async Task AddItemAsync()
         {
             await Navigation.PushAsync(new AddItemPage());
         }
+
+        private async Task DeleteItemAsync(ItemsModel item)
+        {
+            var selected = item as ItemsModel;
+            await this.ItemsRepository.Delete(selected);
+            Items.Remove(selected);
+            TotalStockItems();
+        }
+
+        private async Task UpdateItemAsync(CollectionView collectionView)
+        {
+            if (collectionView.SelectedItem != null)
+            {
+                var selected = collectionView.SelectedItem as ItemsModel;
+                await Navigation.PushAsync(new AddItemPage(selected));
+                collectionView.SelectedItem = null;
+            }
+        } 
     }
 }

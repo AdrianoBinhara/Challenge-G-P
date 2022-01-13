@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="GPInventory.Views.Template.TemplateList"
+    ColumnDefinitions="Auto,*"
+    BackgroundColor="White"
+    RowDefinitions="*,Auto">
+    <Image Grid.RowSpan="2"
+           Source="{Binding Category, Converter={StaticResource ImageConverter}}"
+           HeightRequest="50"
+           WidthRequest="50">
+        <Image.Clip>
+            <EllipseGeometry RadiusX="25"
+                             RadiusY="25"
+                             Center="25,25"/>
+        </Image.Clip>
+    </Image>
+    <Label Grid.Column="1"
+          FontAttributes="Bold"
+          Text="{Binding Name}"/>
+    <Frame HorizontalOptions="Start"
+           Padding="2"
+           CornerRadius="5"
+           BackgroundColor="#ECF5ED"
+           HasShadow="False"
+           Grid.Column="1"
+           Grid.Row="1">
+        <Label Grid.Column="1"
+               Grid.Row="1"
+               TextColor="#458F5A"
+               VerticalTextAlignment="End"
+               Text="{Binding Quantity}"/>
+    </Frame>
+    <Label Grid.RowSpan="2"
+           Grid.Column="1"
+           VerticalOptions="Center"
+           HorizontalOptions="EndAndExpand"
+           FontFamily="FontAwesome"
+           TextColor="Gray"
+           Text="&#xf054;"/>
+</Grid>

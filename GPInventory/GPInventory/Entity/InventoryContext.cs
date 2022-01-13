@@ -8,6 +8,7 @@ namespace GPInventory.Entity
     public class InventoryContext : DbContext
     {
         public DbSet<Items> ItemsList {get;set;}
+
         public InventoryContext()
         {
             this.Database.OpenConnection();

@@ -25,6 +25,8 @@
     <None Remove="Entity\" />
     <None Remove="Repository\" />
     <None Remove="ItemsModel\" />
+    <None Remove="Core\Converters\" />
+    <None Remove="Views\Template\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\" />
@@ -34,8 +36,21 @@
     <Folder Include="Entity\" />
     <Folder Include="Repository\" />
     <Folder Include="Models\" />
+    <Folder Include="Core\Converters\" />
+    <Folder Include="Views\Template\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\Template\InventoryTemplate.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Core\Fonts\Font-Awesome-Solid.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Template\InventoryTemplate.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Template\ItemsTemplate.cs">
+      <DependentUpon>ItemsTemplate.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

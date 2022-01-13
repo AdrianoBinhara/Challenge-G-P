@@ -136,4 +136,10 @@
       <Name>GPInventory</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Eletronicos.png" />
+    <BundleResource Include="Resources\Saude.png" />
+    <BundleResource Include="Resources\Mercado.png" />
+    <BundleResource Include="Resources\Ferramentas.png" />
+  </ItemGroup>
 </Project>

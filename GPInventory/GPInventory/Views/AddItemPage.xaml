@@ -7,8 +7,16 @@
     x:Class="GPInventory.Views.AddItemPage">
     <ContentPage.Content>
         <StackLayout>
-            <Entry Text="{Binding Name}"/>
-            <Entry Text="{ Binding Quantity}"/>
+            <Picker ItemDisplayBinding="{Binding Category}" SelectedItem="{Binding Category}">
+                <Picker.Items>
+                    <x:String>Mercado</x:String>
+                    <x:String>Saúde</x:String>
+                    <x:String>Ferramentas</x:String>
+                    <x:String>Eletrônicos</x:String> 
+                </Picker.Items>
+            </Picker>
+            <Entry Text="{Binding Name}" />
+            <Entry Text="{Binding Quantity}" Keyboard="Numeric"/>
             <Button Text="Salvar" HorizontalOptions="Center"  Command="{Binding SaveItemCommand}"/>
         </StackLayout>
     </ContentPage.Content>

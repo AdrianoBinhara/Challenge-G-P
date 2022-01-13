@@ -13,14 +13,22 @@ namespace GPInventory.Entity
         }
         [Key]
         [DataType("int")]
-        [Column("Id")]
-        public int Id { get; set; }
+        [Column("Guid")]
+        public Guid Id { get; set; }
 
         [Required]
         [DataType("nvarchar(200)")]
         [Column("Name")]
         public string Name { get; set; }
-        public string Quantity { get; set; }
+
+        [Required]
+        [DataType("int")]
+        [Column("Quantity")]
+        public int Quantity { get; set; }
+
+        [DataType("nvarchar(30)")]
+        [Column("Category")]
+        public string Category { get; set; }
     }
 
 }

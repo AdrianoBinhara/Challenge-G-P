@@ -16,6 +16,7 @@ namespace GPInventory.Repository
                 return Task.FromResult(context.ItemsList
                     .Select(x => new ItemsModel()
                     {
+                        Category = x.Category,
                         Name = x.Name,
                         Quantity = x.Quantity,
                         Id = x.Id
@@ -30,11 +31,36 @@ namespace GPInventory.Repository
             {
                 Items items = new Items()
                 {
-                    Id = model.Id,
+                    Category = model.Category,
+                    Id = Guid.NewGuid(),
                     Name = model.Name,
                     Quantity = model.Quantity
                 };
                 context.ItemsList.Add(items);
+                context.SaveChanges();
+            } 
+            return Task.CompletedTask;
+        }
+
+        public Task Update(ItemsModel model)
+        {
+            using (InventoryContext context = new InventoryContext())
+            {
+                var existentItem = context.ItemsList.Find(model.Id);
+                existentItem.Name = model.Name;
+                existentItem.Quantity = model.Quantity;
+                existentItem.Category = model.Category;
+                context.SaveChanges();
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task Delete(ItemsModel model)
+        {
+            using (InventoryContext context = new InventoryContext())
+            {
+                var existentItem = context.ItemsList.Find(model.Id);
+                context.ItemsList.Remove(existentItem);
                 context.SaveChanges();
             }
             return Task.CompletedTask;

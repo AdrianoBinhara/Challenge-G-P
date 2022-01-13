@@ -5,52 +5,107 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="True"
     NavigationPage.HasNavigationBar="False"
-    x:Class="GPInventory.Views.ItemsPage">
+    xmlns:template="GPInventory.Views.Template.TemplateList"
+    x:Class="GPInventory.Views.ItemsPage"
+    x:Name="InventoryPage">
    
     <ContentPage.Content>
-        <StackLayout>
-            <RelativeLayout HorizontalOptions="FillAndExpand"  Padding="10,0" HeightRequest="50" VerticalOptions="Start" BackgroundColor="White">
-                   <Label RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.33}"
-                          RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}"
-                          RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.33}"
-                          RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}" 
-                          Text="Inventário"
-                          VerticalOptions="CenterAndExpand"
-                          HorizontalOptions="CenterAndExpand"
-                          FontSize="Body"
-                          FontAttributes="Bold"
-                          TextColor="Black"/>
-                   <Button x:Name="loginLabel"
-                          Text="&#xf067;" VerticalOptions="CenterAndExpand" TextColor="Black"
-                          HorizontalOptions="End"
-                          FontFamily="FontAwesome"
-                          FontSize="Body"
-                          Command="{Binding AddItemCommand}" CommandParameter="{x:Reference loginLabel}"
-                          RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.6}"
-                          RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}"
-                          RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.33}"
-                          RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}">
-                   </Button>
-                
-            </RelativeLayout>
-               <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding RefreshList}">
-                   <CollectionView BackgroundColor="White"  RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.3}"
-                             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.33}"
-                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.33}"
-                             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.22}"
-                             ItemsSource="{Binding Items}" >
-                       <CollectionView.ItemTemplate>
-                           <DataTemplate>
-                               <StackLayout Spacing="4">
-                                   <Label Text="{Binding Name}"/>
-                                   <BoxView HeightRequest="1"
-                                    BackgroundColor="LightGray"/>
-                               </StackLayout>
+        <StackLayout Padding="30,10">
 
-                           </DataTemplate>
-                       </CollectionView.ItemTemplate>
-                   </CollectionView>
-                </RefreshView>
+            <StackLayout HorizontalOptions="FillAndExpand"
+                        Orientation="Horizontal"
+                        HeightRequest="70"
+                        VerticalOptions="Start"
+                        BackgroundColor="White">
+                <Label Text="Inventário"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="Start"
+                        FontSize="Body"
+                        FontAttributes="Bold"
+                        TextColor="Black"/>
+                   <Button x:Name="loginLabel"
+                        Text="&#xf067;" VerticalOptions="CenterAndExpand" TextColor="Black"
+                        HorizontalOptions="EndAndExpand"
+                        FontFamily="FontAwesome"
+                        FontSize="Body"
+                        Command="{Binding AddItemCommand}" CommandParameter="{x:Reference loginLabel}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Frame BackgroundColor="#ECF5ED"
+                       IsClippedToBounds="True"
+                       HasShadow="False">
+                    <StackLayout>
+                        <Label Text="Total de produtos"
+                               TextColor="Gray"
+                               FontSize="Small"
+                               FontAttributes="Bold"/>
+                        <Label Text="{Binding TotalItems}"
+                               FontSize="Title"
+                               FontAttributes="Bold"/>
+                    </StackLayout>
+                </Frame>
+               
+                 <Frame HasShadow="False"
+                        BackgroundColor="#EBF9FC"  >
+                    <StackLayout>
+                        <Label Text="Total em estoque"
+                               TextColor="Gray"
+                               FontSize="Small"
+                               FontAttributes="Bold"/>
+                        <Label Text="{Binding TotalStock}"
+                               FontSize="Title"
+                               FontAttributes="Bold"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+            <StackLayout>
+                <Label Text="Lista de produtos"
+                       FontSize="Small"
+                       Margin="0,10"
+                       TextColor="Gray"/>
+            </StackLayout>
+
+            <RefreshView IsRefreshing="{Binding IsBusy}"
+                         Command="{Binding RefreshList}">
+                <CollectionView BackgroundColor="White"
+                                x:Name="CollectionItems"
+                                SelectionMode="Single"
+                                VerticalScrollBarVisibility="Never"
+                                SelectionChangedCommand="{Binding UpdateItemCommand}"
+                                SelectionChangedCommandParameter="{x:Reference CollectionItems}"
+                          ItemsSource="{Binding Items}" >
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="25"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Execute">
+                                        <SwipeItem Text="Deletar"
+                                                   IconImageSource="delete.png"
+                                                   BackgroundColor="#FED1D1"
+                                                   Command="{Binding Path=BindingContext.DeleteItemCommand, Source={x:Reference Name=InventoryPage}}"
+                                                   CommandParameter="{Binding .}"/>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <template:TemplateList/>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+             </RefreshView>
+
+             <Button Text="SINCRONIZAR"
+                     VerticalOptions="CenterAndExpand"
+                     TextColor="Black"
+                     HorizontalOptions="CenterAndExpand"
+                     FontSize="Body"
+                     Command="{Binding RefreshList}"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
