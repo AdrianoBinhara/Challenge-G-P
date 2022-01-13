@@ -10,10 +10,11 @@
     x:Name="InventoryPage">
    
     <ContentPage.Content>
-        <StackLayout Padding="30,10">
+        <StackLayout BackgroundColor="White"  Padding="30,10">
 
             <StackLayout HorizontalOptions="FillAndExpand"
                         Orientation="Horizontal"
+                         Padding="0"
                         HeightRequest="70"
                         VerticalOptions="Start"
                         BackgroundColor="White">
@@ -24,11 +25,15 @@
                         FontAttributes="Bold"
                         TextColor="Black"/>
                    <Button x:Name="loginLabel"
-                        Text="&#xf067;" VerticalOptions="CenterAndExpand" TextColor="Black"
-                        HorizontalOptions="EndAndExpand"
-                        FontFamily="FontAwesome"
-                        FontSize="Body"
-                        Command="{Binding AddItemCommand}" CommandParameter="{x:Reference loginLabel}"/>
+                           Text="&#xf067;"
+                           BackgroundColor="White"
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="Black"
+                           HorizontalOptions="EndAndExpand"
+                           FontFamily="FontAwesome"
+                           FontSize="Body"
+                           Command="{Binding AddItemCommand}"
+                           CommandParameter="{x:Reference loginLabel}"/>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal">
@@ -47,6 +52,7 @@
                 </Frame>
                
                  <Frame HasShadow="False"
+                        HorizontalOptions="EndAndExpand"
                         BackgroundColor="#EBF9FC"  >
                     <StackLayout>
                         <Label Text="Total em estoque"
@@ -104,6 +110,7 @@
                      TextColor="Black"
                      HorizontalOptions="CenterAndExpand"
                      FontSize="Body"
+                     BackgroundColor="White"
                      Command="{Binding RefreshList}"/>
 
         </StackLayout>
