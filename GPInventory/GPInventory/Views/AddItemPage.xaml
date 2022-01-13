@@ -6,8 +6,8 @@
     ios:Page.UseSafeArea="True"
     x:Class="GPInventory.Views.AddItemPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Picker ItemDisplayBinding="{Binding Category}" SelectedItem="{Binding Category}">
+        <StackLayout Padding="10">
+            <Picker ItemDisplayBinding="{Binding Category}" Title="Selecione uma categoria" SelectedItem="{Binding Category}">
                 <Picker.Items>
                     <x:String>Mercado</x:String>
                     <x:String>Saúde</x:String>
@@ -15,8 +15,8 @@
                     <x:String>Eletrônicos</x:String> 
                 </Picker.Items>
             </Picker>
-            <Entry Text="{Binding Name}" />
-            <Entry Text="{Binding Quantity}" Keyboard="Numeric"/>
+            <Entry Text="{Binding Name}" Placeholder="Escreva um nome"/>
+            <Entry Text="{Binding Quantity}" Keyboard="Numeric" Placeholder="Selecione uma quantidade"/>
             <Button Text="Salvar" HorizontalOptions="Center"  Command="{Binding SaveItemCommand}"/>
         </StackLayout>
     </ContentPage.Content>

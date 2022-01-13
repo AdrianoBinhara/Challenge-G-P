@@ -60,6 +60,9 @@ namespace GPInventory.ViewModels
 
         private async Task SaveItemAsync()
         {
+            if (Category == null || Quantity == 0 || Name == null)
+                return;
+
             if(Item == null)
             {
                 ItemsModel model = new ItemsModel()
