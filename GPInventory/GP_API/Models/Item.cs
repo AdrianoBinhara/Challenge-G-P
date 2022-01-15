@@ -13,5 +13,7 @@ namespace GP_API.Controllers
 
         [Required(ErrorMessage = "O campo Quantidade é obrigatório")]
         public int Quantity { get; set; }
+        public int IsUpdated { get; set; }
+        public string Category { get; set; }
     }   
-}
+}   
