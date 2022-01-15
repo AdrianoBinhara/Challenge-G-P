@@ -29,6 +29,12 @@ namespace GPInventory.Entity
         [DataType("nvarchar(30)")]
         [Column("Category")]
         public string Category { get; set; }
+
+        [Required]
+        [DataType("int")]
+        [Column("IsUpdated")]
+        public int IsUpdated { get; set; }
+
     }
 
 }

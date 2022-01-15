@@ -10,12 +10,11 @@ namespace GP_API.Controllers
     public class InventoryController : ControllerBase
     {
         private static List<Item> itens = new List<Item>();
-        private static int id = 1;
+        private static Guid id;
 
         [HttpPost]
         public void Sync([FromBody] Item item)
         {
-            item.Id = id++;
             itens.Add(item);
         }
     }

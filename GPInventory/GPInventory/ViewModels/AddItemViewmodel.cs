@@ -82,7 +82,7 @@ namespace GPInventory.ViewModels
                 await this.Itemsrepository.Update(Item);
             }
             
-            MessagingCenter.Send<AddItemViewmodel>(this, "Update");
+            MessagingCenter.Send(this, "Update", Item);
             MessagingCenter.Unsubscribe<AddItemViewmodel>(this, "Update");
             await Navigation.PopAsync();
         }

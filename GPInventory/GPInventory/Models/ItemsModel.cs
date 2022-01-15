@@ -8,6 +8,7 @@ namespace GPInventory.Models
         public string Name { get; set; }
         public int Quantity { get; set; }
         public string Category { get; set; }
+        public int IsUpdated { get; set; }
     }
 
 }

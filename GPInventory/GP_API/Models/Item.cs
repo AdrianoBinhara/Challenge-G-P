@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GP_API.Controllers
 {
     public class Item
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage ="O campo Nome é obrigatório")]
         [StringLength(200, ErrorMessage = "O nome não pode passar de 200 caracteres")]

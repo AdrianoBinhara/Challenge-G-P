@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GPInventory.Models;
@@ -50,7 +51,7 @@ namespace GPInventory.ViewModels
             AddItemCommand = new Command(async () => await AddItemAsync());
             RefreshList = new Command(() =>  LoadItems());
             UpdateItemCommand = new Command<CollectionView>(async (CollectionView) => await UpdateItemAsync(CollectionView));
-            DeleteItemCommand = new Command<ItemsModel>(async (item) => await DeleteItemAsync(item));
+            DeleteItemCommand = new Command<ItemsModel>(async  (item) => await DeleteItemAsync(item));
             LoadItems();
             SubscribeMessaging();
         }
@@ -62,7 +63,7 @@ namespace GPInventory.ViewModels
 
         private void SubscribeMessaging()
         {
-            MessagingCenter.Subscribe<AddItemViewmodel>(this, "Update", (sender) =>
+            MessagingCenter.Subscribe<AddItemViewmodel,ItemsModel>(this, "Update",  (sender, Item) =>
             {
                 LoadItems();
             });
@@ -75,9 +76,8 @@ namespace GPInventory.ViewModels
                 IsBusy = true;
                 try
                 {
-                    List<ItemsModel> data = await ItemsRepository.GetAllasync();
-                    Items = new ObservableCollection<ItemsModel>(data);
-
+                    List<ItemsModel> AllItems = await ItemsRepository.GetAllasync();
+                    Items = new ObservableCollection<ItemsModel>(AllItems);
                     TotalStockItems();
                 }
                 finally
@@ -106,9 +106,9 @@ namespace GPInventory.ViewModels
 
         private async Task DeleteItemAsync(ItemsModel item)
         {
-            var selected = item as ItemsModel;
-            await this.ItemsRepository.Delete(selected);
+            var selected = item;
             Items.Remove(selected);
+            await this.ItemsRepository.Delete(selected);
             TotalStockItems();
         }
 

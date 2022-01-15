@@ -19,7 +19,8 @@ namespace GPInventory.Repository
                         Category = x.Category,
                         Name = x.Name,
                         Quantity = x.Quantity,
-                        Id = x.Id
+                        Id = x.Id,
+                        IsUpdated = x.IsUpdated
                     })
                     .ToList());
             }
@@ -32,9 +33,11 @@ namespace GPInventory.Repository
                 Items items = new Items()
                 {
                     Category = model.Category,
-                    Id = Guid.NewGuid(),
+                    Id = model.Id,
                     Name = model.Name,
-                    Quantity = model.Quantity
+                    Quantity = model.Quantity,
+                    IsUpdated = 0
+                    
                 };
                 context.ItemsList.Add(items);
                 context.SaveChanges();
@@ -50,6 +53,8 @@ namespace GPInventory.Repository
                 existentItem.Name = model.Name;
                 existentItem.Quantity = model.Quantity;
                 existentItem.Category = model.Category;
+                existentItem.IsUpdated = 1;
+                context.ItemsList.Update(existentItem);
                 context.SaveChanges();
             }
             return Task.CompletedTask;
