@@ -14,6 +14,7 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.13" />
+    <PackageReference Include="Refit" Version="6.1.15" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Core\" />
@@ -27,6 +28,8 @@
     <None Remove="ItemsModel\" />
     <None Remove="Core\Converters\" />
     <None Remove="Views\Template\" />
+    <None Remove="Service\" />
+    <None Remove="Refit" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\" />
@@ -38,6 +41,7 @@
     <Folder Include="Models\" />
     <Folder Include="Core\Converters\" />
     <Folder Include="Views\Template\" />
+    <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\Template\InventoryTemplate.xaml" />

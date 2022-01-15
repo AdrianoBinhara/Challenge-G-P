@@ -8,5 +8,6 @@ namespace GP_API.Models
         public int Quantity { get; set; }
         public int IsUpdated { get; set; }
         public string Category { get; set; }
+        public DateTime LastModified { get; set; }
     }
 }

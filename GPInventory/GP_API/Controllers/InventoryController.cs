@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GP_API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/")]
     public class InventoryController : ControllerBase
     {
         private readonly IInventoryService _inventoryService;
@@ -85,7 +85,8 @@ namespace GP_API.Controllers
                 Name = model.Name,
                 Category = model.Category,
                 IsUpdated = model.IsUpdated,
-                Quantity =model.Quantity
+                Quantity = model.Quantity,
+                LastModified = DateTime.Now
             };
         }
         private List<ItemOutputModel> ToOutputModel(List<Item> model)
@@ -102,18 +103,6 @@ namespace GP_API.Controllers
                 Category = inputModel.Category,
                 IsUpdated = inputModel.IsUpdated,
                 Quantity = inputModel.Quantity
-            };
-        }
-
-        private ItemInputModel ToInputModel(Item model)
-        {
-            return new ItemInputModel
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Category = model.Category,
-                IsUpdated = model.IsUpdated,
-                Quantity = model.Quantity
             };
         }
     }

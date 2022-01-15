@@ -4,9 +4,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GPInventory.Core;
 using GPInventory.Models;
 using GPInventory.Repository;
+using GPInventory.Service;
 using GPInventory.Views;
+using Refit;
 using Xamarin.Forms;
 
 namespace GPInventory.ViewModels
@@ -14,6 +17,7 @@ namespace GPInventory.ViewModels
     public class ItemsPageViewmodel: BaseViewmodel
     {
         public INavigation Navigation { get; set; }
+        private readonly IInventoryService _inventoryService;
 
         protected ItemsRepository ItemsRepository { get; } = new ItemsRepository();
 
@@ -45,9 +49,10 @@ namespace GPInventory.ViewModels
         }
 
 
-        public ItemsPageViewmodel(INavigation navigation)
+        public ItemsPageViewmodel(INavigation navigation, IInventoryService inventoryService)
         {
             Navigation = navigation;
+            _inventoryService = inventoryService;
             AddItemCommand = new Command(async () => await AddItemAsync());
             RefreshList = new Command(() =>  LoadItems());
             UpdateItemCommand = new Command<CollectionView>(async (CollectionView) => await UpdateItemAsync(CollectionView));
@@ -78,6 +83,18 @@ namespace GPInventory.ViewModels
                 {
                     List<ItemsModel> AllItems = await ItemsRepository.GetAllasync();
                     Items = new ObservableCollection<ItemsModel>(AllItems);
+
+                    if (Items == null || Items.Count() == 0)
+                    {
+                        List<ItemsModel> model = new List<ItemsModel>();
+
+                            model = await _inventoryService.GetItems();
+                            Items = new ObservableCollection<ItemsModel>(model);
+                            foreach (var item in Items)
+                            {
+                                await this.ItemsRepository.Create(item);
+                            }
+                    }
                     TotalStockItems();
                 }
                 finally
