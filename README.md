@@ -57,17 +57,3 @@ O pacote [```Acr.UserDialogs```](https://github.com/aritchie/userdialogs) é res
 - o App deve ser testado em um dispositivo real para testar a performance qualitativamente.
 
 --- 
-
-## Tópicos
-- [# Clear DevChallenge](#-clear-devchallenge)
-- [Sobre o App](#sobre-o-app)
-- [Algumas especificações](#algumas-especificações)
-- [Pacotes utilizados](#pacotes-utilizados)
-- [Telas Vertical](#telas-vertical)
-- [Telas Horizontal](#telas-horizontal)
-- [Chamadas API](#chamadas-api)
-- [Avisos no app](#avisos-no-app)
-- [Testes](#testes)
-  - [Pacotes de teste](#pacotes-de-teste)
-- [Comentários finais.](#comentários-finais)
-  - [Tópicos](#tópicos)
