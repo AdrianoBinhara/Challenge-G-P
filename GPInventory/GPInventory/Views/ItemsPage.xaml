@@ -105,7 +105,7 @@
                 </CollectionView>
              </RefreshView>
 
-             <Button Text="SINCRONIZAR"
+             <Button Text="{Binding TextSync}"
                      VerticalOptions="CenterAndExpand"
                      TextColor="Black"
                      HorizontalOptions="CenterAndExpand"

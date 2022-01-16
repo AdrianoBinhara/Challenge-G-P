@@ -43,7 +43,6 @@ namespace GP_API
                 app.UseDeveloperExceptionPage();
             }
 
-
             app.UseRouting();
 
             app.UseAuthorization();

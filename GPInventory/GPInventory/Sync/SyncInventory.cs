@@ -16,13 +16,13 @@ namespace GPInventory.Sync
             _inventoryService = invertoryContext;
         }
 
-        public void Sync(List<ItemsModel> Items)
+        public async Task Sync(List<ItemsModel> Items)
         {
-            Task.Run(async () =>
-            {
+            
                 var itemsInDB = await _inventoryService.GetItems();
-                var itemToExclude = itemsInDB.Where(p => !Items.Any(x => x.Id == p.Id));
-                var itemsToAdd = Items.Where(p => !itemsInDB.Any(x => x.Id == p.Id));
+                var itemToExclude = itemsInDB.Where(x => Items.All(p => x.Id != p.Id));
+                var itemsToAdd = Items.Where(p => itemsInDB.All(p2 => p2.Id != p.Id));
+                var itemsToUpdate = Items.Where(p => p.IsUpdated == 1);
                 if(itemToExclude.Any())
                     foreach (var item in itemToExclude)
                     {
@@ -35,14 +35,13 @@ namespace GPInventory.Sync
                         await _inventoryService.AddItem(item);
                     }
 
-                foreach (var item in Items)
-                {
-                    if (item.IsUpdated == 1)
+                if(itemsToUpdate.Any())
+                    foreach (var item in itemsToUpdate)
+                    {
+                        item.IsUpdated = 0;
                         await _inventoryService.UpdateItem(item.Id, item);
-                    
-
-                }
-            });
+                    }
+           
         }
     }
 }

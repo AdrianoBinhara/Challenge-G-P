@@ -28,7 +28,7 @@ namespace GPInventory.Service
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+                ;
             }
             return result;
         }
@@ -42,7 +42,7 @@ namespace GPInventory.Service
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+                ;
             }
 
         }
@@ -58,7 +58,7 @@ namespace GPInventory.Service
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+                ;
             }
 
             if (result.Any() && result != null)
@@ -76,7 +76,7 @@ namespace GPInventory.Service
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+                ;
             }
         }
     }
