@@ -18,8 +18,6 @@ namespace GP_API.Service
 
         public void AddItem(Item item)
         {
-            item.Id = Guid.NewGuid();
-
             _context.items.Add(item);
             _context.SaveChanges();
         }
