@@ -30,7 +30,7 @@ Link para o bug reportado: [Bug](https://developercommunity.visualstudio.com/t/b
 
 
 ## Telas Vertical
-| ![Page1](Resources/splash.png)  | ![Page2](Resources/items.png) | ![Page3](Resources/add.png)
+| ![Page1](Resources/splash_screen.png)  | ![Page2](Resources/items.png) | ![Page3](Resources/add.png)
 |:---:|:---:|:---:|
 | Splash Screen | Tela de itens | Adição de itens |
 
