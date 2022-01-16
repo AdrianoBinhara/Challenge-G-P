@@ -49,27 +49,13 @@ namespace GPInventory.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
 
-        private string _textSync = "SINCRONIZAR";
-        public string TextSync
-        {
-            get => _textSync;
-            set => SetProperty(ref _textSync, value);
-        }
-
-        private bool _isEnable = false;
-        public bool IsEnable
-        {
-            get => _isEnable;
-            set => SetProperty(ref _isEnable, value);
-        }
-
 
         public ItemsPageViewmodel(INavigation navigation, IInventoryService inventoryService)
         {
             Navigation = navigation;
             _inventoryService = inventoryService;
             AddItemCommand = new Command(async () => await AddItemAsync());
-            RefreshList = new Command(async () =>  await SyncAsync());
+            RefreshList = new Command(() =>  SyncAsync());
             UpdateItemCommand = new Command<CollectionView>(async (CollectionView) => await UpdateItemAsync(CollectionView));
             DeleteItemCommand = new Command<ItemsModel>(async  (item) => await DeleteItemAsync(item));
             LoadItems();
@@ -89,18 +75,13 @@ namespace GPInventory.ViewModels
             });
         }
 
-        private async Task SyncAsync()
+        private void SyncAsync()
         {
-            IsBusy =! IsBusy;
-            IsEnable = !IsEnable;
-            TextSync = "Sincronizando...";
             var sync = new SyncInventory(new InventoryService());
-            await sync.Sync(Items.ToList()).ConfigureAwait(true);
-            IsEnable = !IsEnable;
-            IsBusy =! IsBusy;
+            sync.Sync(Items.ToList());
         }
 
-        private void LoadItems()
+        private Task LoadItems()
         {
             Task.Run(async () =>
             {
@@ -128,6 +109,8 @@ namespace GPInventory.ViewModels
                     IsBusy = false;
                 }
             });
+            return Task.CompletedTask;
+            
         }
 
         private void TotalStockItems()

@@ -9,16 +9,16 @@ namespace GPInventory.Service
 {
     public interface IInventoryClient
     {
-        [Get("/")]
+        [Get("/inventory")]
         Task<List<ItemsModel>> GetItems();
 
-        [Post("/")]
+        [Post("/inventory")]
         Task<ItemsModel> AddItem ([Body] ItemsModel item);
         
-        [Put("/{id}")]
+        [Put("/inventory/{id}")]
         Task UpdateItem(Guid id,[Body] ItemsModel item);
 
-        [Delete("/{id}")]
+        [Delete("/inventory/{id}")]
         Task DeleteItem(Guid id);
     }
 }
