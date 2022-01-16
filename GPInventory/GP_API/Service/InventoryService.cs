@@ -6,7 +6,7 @@ using GP_API.Models;
 
 namespace GP_API.Service
 {
-    public class InventoryService :IInventoryService
+    public class InventoryService : IInventoryService
     {
         private readonly List<Item> Items;
         private readonly ApiContext _context;
@@ -26,7 +26,7 @@ namespace GP_API.Service
 
         public void DeleteItem(Guid id)
         {
-            var model = Items.Where(m => m.Id == id).FirstOrDefault();
+            var model = _context.items.Where(m => m.Id == id).FirstOrDefault();
             _context.items.Remove(model);
             _context.SaveChanges();
         }

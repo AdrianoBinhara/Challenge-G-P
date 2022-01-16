@@ -51,7 +51,7 @@ namespace GP_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateItem(Guid id,[FromBody] ItemInputModel item)
+        public IActionResult UpdateItem(Guid id, [FromBody] ItemInputModel item)
         {
             if (item == null || id != item.Id)
                 return BadRequest();
@@ -91,7 +91,7 @@ namespace GP_API.Controllers
         }
         private List<ItemOutputModel> ToOutputModel(List<Item> model)
         {
-            return model.Select(item=> ToOutputModel(item)).ToList();
+            return model.Select(item => ToOutputModel(item)).ToList();
         }
 
         private Item ToDomainModel(ItemInputModel inputModel)
