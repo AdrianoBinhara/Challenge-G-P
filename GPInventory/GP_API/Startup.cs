@@ -34,7 +34,6 @@ namespace GP_API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
