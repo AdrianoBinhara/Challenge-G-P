@@ -18,6 +18,7 @@
     </Image>
     <Label Grid.Column="1"
           FontAttributes="Bold"
+           TextColor="Black"
           Text="{Binding Name}"/>
     <Frame HorizontalOptions="Start"
            Padding="2"

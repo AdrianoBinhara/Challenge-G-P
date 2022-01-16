@@ -165,7 +165,6 @@ namespace GPInventory.ViewModels
         {
             await Navigation.PushAsync(new AddItemPage());
 
-            MessagingCenter.Unsubscribe<Page>(this, "Sync");
             MessagingCenter.Unsubscribe<Page>(this, "AlreadySync");
         }
 
@@ -184,7 +183,6 @@ namespace GPInventory.ViewModels
                 var selected = collectionView.SelectedItem as ItemsModel;
                 await Navigation.PushAsync(new AddItemPage(selected));
 
-                MessagingCenter.Unsubscribe<Page>(this, "Sync");
                 MessagingCenter.Unsubscribe<Page>(this, "AlreadySync");
 
                 collectionView.SelectedItem = null;

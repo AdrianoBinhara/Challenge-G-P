@@ -65,25 +65,33 @@ namespace GPInventory.ViewModels
             if (Category == null || Quantity == 0 || Name == null)
                 return;
 
-            if(Item == null)
+            try
             {
-                ItemsModel model = new ItemsModel()
+                if (Item == null)
                 {
-                    Category = this.Category,
-                    Quantity = this.Quantity,
-                    Name = this.Name
-                };
-                await this.Itemsrepository.Create(model);
-                UserDialogs.Instance.Toast($"Item {model.Name} criado!", TimeSpan.FromSeconds(3));
+                    ItemsModel model = new ItemsModel()
+                    {
+                        Category = this.Category,
+                        Quantity = this.Quantity,
+                        Name = this.Name
+                    };
+                    await this.Itemsrepository.Create(model);
+                    UserDialogs.Instance.Toast($"Item {model.Name} criado!", TimeSpan.FromSeconds(3));
+                }
+                else
+                {
+                    Item.Name = Name;
+                    Item.Category = Category;
+                    Item.Quantity = Quantity;
+                    await this.Itemsrepository.Update(Item);
+                    UserDialogs.Instance.Toast($"Item {Item.Name} salvo!", TimeSpan.FromSeconds(3));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Item.Name = Name;
-                Item.Category = Category;
-                Item.Quantity = Quantity;
-                await this.Itemsrepository.Update(Item);
-                UserDialogs.Instance.Toast($"Item {Item.Name} salvo!", TimeSpan.FromSeconds(3));
+               await App.Current.MainPage.DisplayAlert("Alerta", ex.Message, "OK");
             }
+
 
             ClearFields();
             
