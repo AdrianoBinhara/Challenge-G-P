@@ -102,8 +102,8 @@ namespace GPInventory.ViewModels
 
         private void ClearFields()
         {
-            Category = null;
-            Name = null;
+            Category = string.Empty;
+            Name = string.Empty;
             Quantity = 0;
         }
     }
