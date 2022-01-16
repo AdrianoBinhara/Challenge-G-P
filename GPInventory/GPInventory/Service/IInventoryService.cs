@@ -14,6 +14,6 @@ namespace GPInventory.Service
 
         Task UpdateItem(Guid id, ItemsModel item);
 
-        Task DeleteItem(Guid id);
+        Task DeleteItem(ItemsModel id);
     }
 }

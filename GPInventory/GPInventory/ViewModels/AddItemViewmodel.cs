@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Acr.UserDialogs;
 using GPInventory.Models;
 using GPInventory.Repository;
 using GPInventory.Service;
@@ -73,6 +74,7 @@ namespace GPInventory.ViewModels
                     Name = this.Name
                 };
                 await this.Itemsrepository.Create(model);
+                UserDialogs.Instance.Toast($"Item {model.Name} criado!", TimeSpan.FromSeconds(3));
             }
             else
             {
@@ -80,11 +82,21 @@ namespace GPInventory.ViewModels
                 Item.Category = Category;
                 Item.Quantity = Quantity;
                 await this.Itemsrepository.Update(Item);
+                UserDialogs.Instance.Toast($"Item {Item.Name} salvo!", TimeSpan.FromSeconds(3));
             }
+
+            ClearFields();
             
             MessagingCenter.Send(this, "Update", Item);
             MessagingCenter.Unsubscribe<AddItemViewmodel>(this, "Update");
-            await Navigation.PopAsync();
+            
+        }
+
+        private void ClearFields()
+        {
+            Category = null;
+            Name = null;
+            Quantity = 0;
         }
     }
 }

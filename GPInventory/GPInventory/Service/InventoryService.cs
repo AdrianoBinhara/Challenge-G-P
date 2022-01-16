@@ -26,23 +26,23 @@ namespace GPInventory.Service
             {
                 result = await itemsApi.AddItem(item);
             }
-            catch (Exception ex)
+            catch
             {
-                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+                MessagingCenter.Send(this, "Sync");
             }
             return result;
         }
 
-        public async Task DeleteItem(Guid id)
+        public async Task DeleteItem(ItemsModel item)
         {
             try
             {
                 var itemsApi = RestService.For<IInventoryClient>(AppSettings.BaseUrl);
-                await itemsApi.DeleteItem(id);
+                await itemsApi.DeleteItem(item.Id);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+                MessagingCenter.Send(this, "Sync");
             }
 
         }
@@ -56,9 +56,9 @@ namespace GPInventory.Service
             {
                 result = await itemsApi.GetItems();
             }
-            catch (Exception ex)
+            catch
             {
-                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+                MessagingCenter.Send(this, "Sync");
             }
 
             if (result.Any() && result != null)
@@ -73,10 +73,11 @@ namespace GPInventory.Service
             {
                 var itemsApi = RestService.For<IInventoryClient>(AppSettings.BaseUrl);
                 await itemsApi.UpdateItem(id, items);
+                
             }
-            catch (Exception ex)
+            catch
             {
-                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+                MessagingCenter.Send(this, "Sync");
             }
         }
     }

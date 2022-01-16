@@ -15,6 +15,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.13" />
     <PackageReference Include="Refit" Version="6.1.15" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.514" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Core\" />
@@ -31,6 +32,7 @@
     <None Remove="Service\" />
     <None Remove="Refit" />
     <None Remove="Sync\" />
+    <None Remove="Acr.UserDialogs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\" />

@@ -5,7 +5,7 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     ios:Page.UseSafeArea="True"
     NavigationPage.HasNavigationBar="False"
-    xmlns:template="GPInventory.Views.Template.TemplateList"
+    xmlns:template="clr-namespace:GPInventory.Views.Template"
     x:Class="GPInventory.Views.ItemsPage"
     x:Name="InventoryPage">
    
@@ -105,11 +105,12 @@
                 </CollectionView>
              </RefreshView>
 
-             <Button Text="SINCRONIZAR"
+             <Button Text="{Binding TextSync}"
                      VerticalOptions="CenterAndExpand"
                      TextColor="Black"
                      HorizontalOptions="CenterAndExpand"
                      FontSize="Body"
+                     IsEnabled="{Binding IsEnable}"
                      BackgroundColor="White"
                      Command="{Binding RefreshList}"/>
 
