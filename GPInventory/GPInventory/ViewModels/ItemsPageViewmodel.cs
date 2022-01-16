@@ -88,6 +88,10 @@ namespace GPInventory.ViewModels
             {
                 LoadItems();
             });
+            MessagingCenter.Subscribe<Page>(this, "Sync", (sender) =>
+            {
+                UserDialogs.Instance.Toast("Não foi possível sincronizar, tente novamente", TimeSpan.FromSeconds(3));
+            });
         }
 
         private async Task SyncAsync()
@@ -99,24 +103,11 @@ namespace GPInventory.ViewModels
             var sync = new SyncInventory(new InventoryService());
             await sync.Sync(Items.ToList());
 
-
             TextSync = "SINCRONIZAR";
             IsEnable = true;
             IsBusy = false;
 
-            RegisterForError();
-        }
-
-        private void RegisterForError()
-        {
-            MessagingCenter.Subscribe<Page>(this, "Sync", (sender) =>
-            {
-                UserDialogs.Instance.Toast("Não foi possível sincronizar, tente novamente", TimeSpan.FromSeconds(3));
-            });
-            MessagingCenter.Subscribe<SyncInventory>(this, "AlreadySync", (sender) =>
-            {
-                UserDialogs.Instance.Toast("Items sincronizados", TimeSpan.FromSeconds(3));
-            });
+            UserDialogs.Instance.Toast("Items sincronizados", TimeSpan.FromSeconds(3));
         }
 
         private Task LoadItems()
@@ -164,8 +155,6 @@ namespace GPInventory.ViewModels
         private async Task AddItemAsync()
         {
             await Navigation.PushAsync(new AddItemPage());
-
-            MessagingCenter.Unsubscribe<Page>(this, "AlreadySync");
         }
 
         private async Task DeleteItemAsync(ItemsModel item)
@@ -182,8 +171,6 @@ namespace GPInventory.ViewModels
             {
                 var selected = collectionView.SelectedItem as ItemsModel;
                 await Navigation.PushAsync(new AddItemPage(selected));
-
-                MessagingCenter.Unsubscribe<Page>(this, "AlreadySync");
 
                 collectionView.SelectedItem = null;
             }

@@ -46,7 +46,6 @@ namespace GPInventory.Sync
                     item.IsUpdated = 0;
                     await _inventoryService.UpdateItem(item.Id, item);
                 }
-            MessagingCenter.Send(this, "AlreadySync");
         }
     }
 }
