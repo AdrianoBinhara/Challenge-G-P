@@ -30,15 +30,9 @@ Link para o bug reportado: [Bug](https://developercommunity.visualstudio.com/t/b
 
 
 ## Telas Vertical
-| ![Page1](Resources/splash.png)  | ![Page2](Resources/login1.png) | ![Page3](Resources/order1.png)
+| ![Page1](Resources/splash.png)  | ![Page2](Resources/items.png) | ![Page3](Resources/add.png)
 |:---:|:---:|:---:|
 | Splash Screen | Tela de login | Listagem de ordens |
-
-## Telas Horizontal
-| ![Page2](Resources/login2.png) | ![Page3](Resources/order2.png)
-|:---:|:---:|
-| Tela de login | Listagem de ordens |
-
 
 ## Chamadas API
 O aplicativo utiliza o pacote [```Refit```](https://github.com/reactiveui/refit) para chamadas API REST, por possuir uma implementação fácil, código limpo e legível.
