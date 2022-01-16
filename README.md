@@ -44,7 +44,6 @@ Facilita também a criação de testes unitários.
 
 ## Avisos no app
 O pacote [```Acr.UserDialogs```](https://github.com/aritchie/userdialogs) é responsável pela exibição de toasts. Diferente da implementação nativa, ele possui um visual moderno e de fácil estilização.
-![Toast](Resources/toast.png)
 
 ### Possíveis erros ⚠️
 - O backend está hospedado em um serviço gratuito do Heroku, que desliga automaticamente após 30 minutos de inatividade. Por conta disso, a primeira requisição feita pelo app pode demorar um pouco mais que as demais requisições posteriores.
