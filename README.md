@@ -44,10 +44,9 @@ Link para o bug reportado: [Bug](https://developercommunity.visualstudio.com/t/b
 O aplicativo utiliza o pacote [```Refit```](https://github.com/reactiveui/refit) para chamadas API REST, por possuir uma implementação fácil, código limpo e legível.
 Facilita também a criação de testes unitários.
 ```C#
- [Get("/api/v1/swingtrade/orders")]
- Task<List<Order>> GetAll();
+ [[Get("/")]
+ Task<List<ItemsModel>> GetItems();
 ```
-
 
 ## Avisos no app
 O pacote [```Acr.UserDialogs```](https://github.com/aritchie/userdialogs) é responsável pela exibição de toasts. Diferente da implementação nativa, ele possui um visual moderno e de fácil estilização.
