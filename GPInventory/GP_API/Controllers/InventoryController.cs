@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GP_API.Controllers
 {
     [ApiController]
-    [Route("[controler]")]
+    [Route("[controller]")]
     public class InventoryController : ControllerBase
     {
         private readonly IInventoryService _inventoryService;
