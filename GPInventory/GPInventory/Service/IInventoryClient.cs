@@ -13,12 +13,12 @@ namespace GPInventory.Service
         Task<List<ItemsModel>> GetItems();
 
         [Post("/inventory")]
-        Task<ItemsModel> AddItem();
+        Task<ItemsModel> AddItem ([Body] ItemsModel item);
         
         [Put("/inventory/{id}")]
-        Task UpdateItem(Guid id, Items items);
+        Task UpdateItem(Guid id,[Body] ItemsModel item);
 
-        [Put("/inventory/{id}")]
+        [Delete("/inventory/{id}")]
         Task DeleteItem(Guid id);
     }
 }

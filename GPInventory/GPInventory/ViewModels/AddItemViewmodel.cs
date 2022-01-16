@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GPInventory.Models;
 using GPInventory.Repository;
+using GPInventory.Service;
 using GPInventory.Views;
 using Xamarin.Forms;
 
@@ -15,7 +16,7 @@ namespace GPInventory.ViewModels
     {
         public INavigation Navigation { get; set; }
         protected ItemsRepository Itemsrepository { get; } = new ItemsRepository();
-
+        protected IInventoryService _inventoryService;
         public ItemsModel Item = new ItemsModel();
 
         private string _category;
@@ -37,13 +38,16 @@ namespace GPInventory.ViewModels
             get => _name;
             set => SetProperty(ref _name, value);
         }
-        public AddItemViewmodel(INavigation navigation, ItemsModel item = null)
+        public AddItemViewmodel(INavigation navigation, IInventoryService inventoryService, ItemsModel item = null)
         {
+            _inventoryService = inventoryService;
             Item = item;
             Populate();
             Navigation = navigation;
             SaveItemCommand = new Command(async () => await SaveItemAsync());
         }
+
+        public ICommand SaveItemCommand { get; set; }
 
         private void Populate()
         {
@@ -53,10 +57,7 @@ namespace GPInventory.ViewModels
                 Category = Item?.Category;
                 Quantity = (int)(Item?.Quantity);
             }
-        }
-
-        public ICommand SaveItemCommand { get; set; }
-        
+        }        
 
         private async Task SaveItemAsync()
         {
@@ -72,7 +73,6 @@ namespace GPInventory.ViewModels
                     Name = this.Name
                 };
                 await this.Itemsrepository.Create(model);
-                
             }
             else
             {

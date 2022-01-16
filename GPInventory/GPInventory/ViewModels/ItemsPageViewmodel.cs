@@ -8,6 +8,7 @@ using GPInventory.Core;
 using GPInventory.Models;
 using GPInventory.Repository;
 using GPInventory.Service;
+using GPInventory.Sync;
 using GPInventory.Views;
 using Refit;
 using Xamarin.Forms;
@@ -54,7 +55,7 @@ namespace GPInventory.ViewModels
             Navigation = navigation;
             _inventoryService = inventoryService;
             AddItemCommand = new Command(async () => await AddItemAsync());
-            RefreshList = new Command(() =>  LoadItems());
+            RefreshList = new Command(() =>  SyncAsync());
             UpdateItemCommand = new Command<CollectionView>(async (CollectionView) => await UpdateItemAsync(CollectionView));
             DeleteItemCommand = new Command<ItemsModel>(async  (item) => await DeleteItemAsync(item));
             LoadItems();
@@ -74,6 +75,12 @@ namespace GPInventory.ViewModels
             });
         }
 
+        private void SyncAsync()
+        {
+            var sync = new SyncInventory(new InventoryService());
+            sync.Sync(Items.ToList());
+        }
+
         private Task LoadItems()
         {
             Task.Run(async () =>
@@ -88,12 +95,12 @@ namespace GPInventory.ViewModels
                     {
                         List<ItemsModel> model = new List<ItemsModel>();
 
-                            model = await _inventoryService.GetItems();
-                            Items = new ObservableCollection<ItemsModel>(model);
-                            foreach (var item in Items)
-                            {
-                                await this.ItemsRepository.Create(item);
-                            }
+                        model = await _inventoryService.GetItems();
+                        Items = new ObservableCollection<ItemsModel>(model);
+                        foreach (var item in Items)
+                        {
+                            await this.ItemsRepository.Create(item);
+                        }
                     }
                     TotalStockItems();
                 }

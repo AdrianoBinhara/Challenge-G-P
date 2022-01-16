@@ -30,6 +30,7 @@
     <None Remove="Views\Template\" />
     <None Remove="Service\" />
     <None Remove="Refit" />
+    <None Remove="Sync\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\" />
@@ -42,6 +43,7 @@
     <Folder Include="Core\Converters\" />
     <Folder Include="Views\Template\" />
     <Folder Include="Service\" />
+    <Folder Include="Sync\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\Template\InventoryTemplate.xaml" />

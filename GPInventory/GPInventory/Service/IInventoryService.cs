@@ -10,10 +10,10 @@ namespace GPInventory.Service
     {
         Task<List<ItemsModel>> GetItems();
 
-        Task<ItemsModel> AddItem();
+        Task<ItemsModel> AddItem(ItemsModel item);
 
-        void UpdateItem(Guid id, Items items);
+        Task UpdateItem(Guid id, ItemsModel item);
 
-        void DeleteItem(Guid id);
+        Task DeleteItem(Guid id);
     }
 }

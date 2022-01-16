@@ -17,14 +17,34 @@ namespace GPInventory.Service
         {
         }
 
-        public Task<ItemsModel> AddItem()
+        public async Task<ItemsModel> AddItem(ItemsModel item)
         {
-            throw new NotImplementedException();
+            var itemsApi = RestService.For<IInventoryClient>(AppSettings.BaseUrl);
+            var result = new ItemsModel();
+
+            try
+            {
+                result = await itemsApi.AddItem(item);
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+            }
+            return result;
         }
 
-        public void DeleteItem(Guid id)
+        public async Task DeleteItem(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var itemsApi = RestService.For<IInventoryClient>(AppSettings.BaseUrl);
+                await itemsApi.DeleteItem(id);
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+            }
+
         }
 
         public async Task<List<ItemsModel>> GetItems()
@@ -38,7 +58,7 @@ namespace GPInventory.Service
             }
             catch (Exception ex)
             {
-                ;
+                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
             }
 
             if (result.Any() && result != null)
@@ -47,9 +67,17 @@ namespace GPInventory.Service
             return result;
         }
 
-        public void UpdateItem(Guid id, Items items)
+        public async Task UpdateItem(Guid id, ItemsModel items)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var itemsApi = RestService.For<IInventoryClient>(AppSettings.BaseUrl);
+                await itemsApi.UpdateItem(id, items);
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Alerta", ex.Message.ToString(), "OK");
+            }
         }
     }
 }
